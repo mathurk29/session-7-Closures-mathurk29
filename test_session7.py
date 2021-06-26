@@ -159,4 +159,4 @@ def test_doc_string_outer():
     check_docstring(session7.outer), 'Put some docstring > 50'
 
 def test_outer_closure():
-    assert session7.outer.__closure__ is not None, 'Not using closure'
+    assert session7.outer.__code__.co_freevars is not None, 'Not using closure? Eh!'
