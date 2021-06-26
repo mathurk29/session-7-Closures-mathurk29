@@ -117,6 +117,46 @@ def test_div():
         assert counter_div(x,y) == x / y, 'Wrong for division of: ' + x + ' and ' + y
     assert session7.arith_counter['div'] == 10, 'Wrong for division'
 
+def test_doc_string_outer():
+    check_docstring = session7.closure_docstring()
+    check_docstring(session7.arith), 'Put some docstring > 50'
 
 #############################################################################################################################################
 
+
+def test_add_counter():
+    add_counter = {'counter':0}
+    counter_add = session7.outer(session7.add, add_counter)
+    for _ in range(10):
+        x = random.randint(-100,100)
+        y = random.randint(-100,100)
+        assert counter_add(x,y) == x + y, 'Wrong for addition of: ' + x + ' and ' + y
+    assert session7.arith_counter['add'] == 10, 'Wrong for add'
+
+def test_mul_counter():
+    mul_counter = {'counter':0}
+    counter_mul = session7.outer(session7.mul, mul_counter)
+    for _ in range(10):
+        x = random.randint(-100,100)
+        y = random.randint(-100,100)
+        assert counter_mul(x,y) == x * y, 'Wrong for multiplication of: ' + x + ' and ' + y
+    assert session7.arith_counter['mul'] == 10, 'Wrong for multiply'
+
+def test_div_counter():
+    div_counter = {'counter':0}
+    counter_div = session7.outer(session7.div, div_counter)
+    for _ in range(10):
+        x = random.randint(-100,100)
+        y = random.randint(-100,100)
+        if y == 0:
+            continue
+        assert counter_div(x,y) == x / y, 'Wrong for division of: ' + x + ' and ' + y
+    assert session7.arith_counter['div'] == 10, 'Wrong for division'
+
+
+def test_doc_string_outer():
+    check_docstring = session7.closure_docstring()
+    check_docstring(session7.outer), 'Put some docstring > 50'
+
+def test_outer_closure():
+    assert session7.outer.__closure__ is not None, 'Not using closure'

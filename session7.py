@@ -62,3 +62,21 @@ def arith(fn):
 
 print(arith_counter)
 
+################################################################################################################################################################################################
+
+
+
+
+def outer(fn,count):
+    ''' 
+        Returns a closure which updates the passsed counter with the number of times a function is called.
+
+        Closre: The function passed with the extended scope of global counter arith_counter.
+
+    '''
+    def inner(a,b):
+        count['counter'] +=1 
+        return fn(a,b)
+    return inner
+
+
